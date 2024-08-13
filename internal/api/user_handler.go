@@ -96,7 +96,7 @@ func (u *HTTPHandler) GetAllProducts(c *gin.Context) {
 		util.Response(c, "invalid token", 401, err.Error(), nil)
 		return
 	}
-	
+
 	products, err := u.Repository.GetAllProducts()
 	if err != nil {
 		util.Response(c, "Error getting products", 500, err.Error(), nil)
@@ -126,3 +126,6 @@ func (u *HTTPHandler) GetProductByID(c *gin.Context) {
 	}
 	util.Response(c, "Success", 200, product, nil)
 }
+
+
+///uhvbuwyvuybsdhubvjhdbvhjdb vjibds jbdjsvbksjrbgj rbguiruibrvbijvbjsdbvjdbjvbdjvbvbd rnhjbvhjavbf bjfbv
