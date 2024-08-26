@@ -81,3 +81,11 @@ func (p *Postgres) GetCartItemByProductID(productID uint) (*models.IndividualIte
 	}
 	return cart, nil
 }
+
+// Delete a product from the cart
+func (p *Postgres) DeleteProductFromCart(cart *models.IndividualItemInCart) error {
+	if err := p.DB.Delete(cart).Error; err != nil {
+		return err
+	}
+	return nil
+}

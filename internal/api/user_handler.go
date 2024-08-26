@@ -205,3 +205,35 @@ func (u *HTTPHandler) EditCart(c *gin.Context) {
 
 	util.Response(c, "product successfully added", 200, nil, nil)
 }
+
+// delete product from cart
+func (u *HTTPHandler) DeleteProductFromCart(c *gin.Context) {
+	// Get user id from context
+	_, err := u.GetUserFromContext(c)
+	if err != nil {
+		util.Response(c, "Error getting user from context", 500, err.Error(), nil)
+		return
+	}
+
+	// Get product by id
+	productID := c.Param("id")
+	productIDInt, err := strconv.Atoi(productID)
+	if err != nil {
+		util.Response(c, "Invalid product ID", 400, err.Error(), nil)
+		return
+	}
+
+	// Validate request
+	shoppingCart, err := u.Repository.GetCartItemByProductID(uint(productIDInt))
+	if err != nil {
+		util.Response(c, "Product not found", 404, err.Error(), nil)
+		return
+	}
+
+	err = u.Repository.DeleteProductFromCart(shoppingCart)
+	if err != nil {
+		util.Response(c, "Internal server error", 500, err.Error(), nil)
+		return
+	}
+	util.Response(c, "Product deleted from cart", 200, nil, nil)
+}
