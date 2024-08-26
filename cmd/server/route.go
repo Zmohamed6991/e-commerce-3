@@ -56,3 +56,5 @@ func SetupRouter(handler *api.HTTPHandler, repository ports.Repository) *gin.Eng
 
 	return router
 }
+
+user.GET("/viewcart", handler.ViewCart)

@@ -65,3 +65,14 @@ func (p *Postgres) GetAllProducts() ([]models.Product, error) {
 	}
 	return products, nil
 }
+func (p *Postgress) GetCartsByUserID(userID unit)([]*models.IndividualItemInCart,error) {
+	var cartItems []*models.IndividualItemInCart
+	// find gum method - codition find
+	if err:= p.DBWhere("ID = ?," userID).Find(&cartItems).Error; err != nil{
+		return nil,err
+	}
+	return cartItems, nil
+}
+
+
+

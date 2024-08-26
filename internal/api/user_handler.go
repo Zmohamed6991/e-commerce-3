@@ -96,7 +96,7 @@ func (u *HTTPHandler) GetAllProducts(c *gin.Context) {
 		util.Response(c, "invalid token", 401, err.Error(), nil)
 		return
 	}
-	
+
 	products, err := u.Repository.GetAllProducts()
 	if err != nil {
 		util.Response(c, "Error getting products", 500, err.Error(), nil)
@@ -125,4 +125,19 @@ func (u *HTTPHandler) GetProductByID(c *gin.Context) {
 		return
 	}
 	util.Response(c, "Success", 200, product, nil)
+}
+
+// View cart
+func (u *HTTPHandler) ViewCart(c *gin.Context) {
+	user, err := u.GetUserFromContext(c)
+	if err != nil {
+		util.Response(c, "Ibvalid Token", 401, err.Error(), nil)
+		return
+	}
+	cartItems, err := u.Repository.GetCartsByUserId(user.ID)
+	if err != nil {
+		util.Response(c, "Error Couldnt get the cart items", 500, err.Error(), nil)
+		return
+	}
+	util.Response(c, "product added to cart ", 200, cartItems, nil)
 }
