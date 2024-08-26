@@ -37,8 +37,10 @@ func SetupRouter(handler *api.HTTPHandler, repository ports.Repository) *gin.Eng
 	user.Use(middleware.AuthorizeUser(repository.FindUserByEmail, repository.TokenInBlacklist))
 	{
 		user.POST("/logout", handler.Logout)
-		user.GET("/allproducts", handler.GetAllProducts)
+		user.GET("/product/all", handler.GetAllProducts)
 		user.GET("/product/:id", handler.GetProductByID)
+		user.POST("/cart/add", handler.AddToCart)
+		user.PUT("/cart/edit", handler.EditCart)
 	}
 
 	seller := r.Group("/seller")
@@ -51,7 +53,7 @@ func SetupRouter(handler *api.HTTPHandler, repository ports.Repository) *gin.Eng
 	seller.Use(middleware.AuthorizeSeller(repository.FindSellerByEmail, repository.TokenInBlacklist))
 	{
 		seller.POST("/logout", handler.Logout)
-		seller.POST("/createproduct", handler.CreateProduct)
+		seller.POST("/product/create", handler.CreateProduct)
 	}
 
 	return router

@@ -96,7 +96,7 @@ func (u *HTTPHandler) GetAllProducts(c *gin.Context) {
 		util.Response(c, "invalid token", 401, err.Error(), nil)
 		return
 	}
-	
+
 	products, err := u.Repository.GetAllProducts()
 	if err != nil {
 		util.Response(c, "Error getting products", 500, err.Error(), nil)
@@ -125,4 +125,83 @@ func (u *HTTPHandler) GetProductByID(c *gin.Context) {
 		return
 	}
 	util.Response(c, "Success", 200, product, nil)
+}
+
+func (u *HTTPHandler) AddToCart(c *gin.Context) {
+	user, err := u.GetUserFromContext(c)
+	if err != nil {
+		util.Response(c, "invalid token", 401, err.Error(), nil)
+		return
+	}
+
+	var cart *models.IndividualItemInCart
+	err = c.ShouldBind(&cart)
+	if err != nil {
+		util.Response(c, "invalid request", 401, err.Error(), nil)
+		return
+	}
+
+	product, err := u.Repository.GetProductByID(cart.ProductID)
+	if err != nil {
+		util.Response(c, "product not found", 500, err.Error(), nil)
+		return
+	}
+
+	if cart.Quantity > product.Quantity {
+		util.Response(c, "product out of stock", 400, nil, nil)
+		return
+	}
+
+	cart.UserID = user.ID
+
+	err = u.Repository.AddToCart(cart)
+	if err != nil {
+		util.Response(c, "error adding product to cart", 500, err.Error(), nil)
+		return
+	}
+
+	util.Response(c, "product added to cart", 200, product, nil)
+}
+
+func (u *HTTPHandler) EditCart(c *gin.Context) {
+	user, err := u.GetUserFromContext(c)
+	if err != nil {
+		util.Response(c, "invalid token", 401, err.Error(), nil)
+		return
+	}
+
+	var cart *models.IndividualItemInCart
+	err = c.ShouldBind(&cart)
+	if err != nil {
+		util.Response(c, "invalid request", 401, err.Error(), nil)
+		return
+	}
+
+	shoppingCart, err := u.Repository.GetCartItemByProductID(cart.ProductID)
+	if err != nil {
+		util.Response(c, "Cart not found", 404, err.Error(), nil)
+		return
+	}
+
+	product, err := u.Repository.GetProductByID(cart.ProductID)
+	if err != nil {
+		util.Response(c, "product not found", 500, err.Error(), nil)
+		return
+	}
+
+	if cart.Quantity > product.Quantity {
+		util.Response(c, "not enough products", 400, nil, nil)
+		return
+
+	}
+	cart.UserID = user.ID
+	cart.ID = shoppingCart.ID
+
+	err = u.Repository.AddToCart(cart)
+	if err != nil {
+		util.Response(c, "Error editing product quantity.", 500, err.Error(), nil)
+		return
+	}
+
+	util.Response(c, "product successfully added", 200, nil, nil)
 }
