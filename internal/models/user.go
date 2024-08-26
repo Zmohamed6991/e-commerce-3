@@ -19,3 +19,10 @@ type LoginRequestUser struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
+
+type IndividualItemInCart struct {
+	gorm.Model
+	UserID    uint `json:"user_id"`
+	ProductID uint `json:"product_id"`
+	Quantity  int  `json:"quantity"`
+}
