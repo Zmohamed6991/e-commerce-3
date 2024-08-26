@@ -73,16 +73,11 @@ func (p *Postgres) AddToCart(cart *models.IndividualItemInCart) error {
 	return nil
 }
 
-func (p *Postgres) GetCartByUserID(userID uint) (*models.IndividualItemInCart, error) {
+func (p *Postgres) GetCartItemByProductID(productID uint) (*models.IndividualItemInCart, error) {
 	cart := &models.IndividualItemInCart{}
 
-	if err := p.DB.Where("ID = ?", userID).First(&cart).Error; err != nil {
+	if err := p.DB.Where("ID = ?", productID).First(&cart).Error; err != nil {
 		return nil, err
 	}
 	return cart, nil
 }
-
-
-
-
-
