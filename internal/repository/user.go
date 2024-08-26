@@ -2,6 +2,7 @@ package repository
 
 import (
 	"e-commerce/internal/models"
+	"errors"
 )
 
 func (p *Postgres) FindUserByEmail(email string) (*models.User, error) {
@@ -89,14 +90,22 @@ func (p *Postgres) DeleteProductFromCart(cart *models.IndividualItemInCart) erro
 	}
 	return nil
 }
-func (p *Postgress) GetCartsByUserID(userID unit)([]*models.IndividualItemInCart,error) {
+func (p *Postgres) GetCartsByUserID(userID uint) ([]*models.IndividualItemInCart, error) {
 	var cartItems []*models.IndividualItemInCart
-	// find gum method - codition find
-	if err:= p.DBWhere("ID = ?," userID).Find(&cartItems).Error; err != nil{
-		return nil,err
+
+	// Fetch cart items for the user with null OrderID
+	if err := p.DB.Where("user_id = ? AND order_id IS NULL", userID).Find(&cartItems).Error; err != nil {
+		return nil, err
 	}
+
+	// If no items found, return an error
+	if len(cartItems) == 0 {
+		return nil, errors.New("no items found in cart")
+	}
+
 	return cartItems, nil
 }
+
 
 
 
