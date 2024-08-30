@@ -106,6 +106,19 @@ func (p *Postgres) GetCartsByUserID(userID uint) ([]*models.IndividualItemInCart
 	return cartItems, nil
 }
 
+func (p *Postgres) OrderHistorybyUserID(userID uint) ([]*models.Order, error) {
+	var orders []*models.Order
+
+	if err := p.DB.Where("user_id = ?", userID).Find(&orders).Error; err != nil {
+		return nil, err
+	}
+	return orders, nil
+
+
+
+}
+
+
 
 
 
