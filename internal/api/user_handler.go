@@ -301,13 +301,25 @@ func (u *HTTPHandler) OrderHistory(c *gin.Context) {
 	}
 
 	// go into order table to check user id to find order
-
 	orders, err := u.Repository.OrderHistorybyUserID(user.ID)
-
 	if err != nil {
 		util.Response(c, "Order not found", 404, err.Error(), nil)
 		return
 	}
-	util.Response(c, "Order history found", 200, orders, nil)
+	
+	var orderDetails []models.Order
+	for _, order := range orders {
+		orderItems, err := u.Repository.GetOrderItemsByOrderID(order.ID)
+		if err != nil {
+			util.Response(c, "Internal server error", 500, err.Error(), nil)
+			return
+		}
+		order.Items = orderItems
+		orderDetails = append(orderDetails, *order)
+	}
+
+	util.Response(c, "Orders fetched", 200, gin.H{
+		"orders": orderDetails,
+	}, nil)
 
 }
