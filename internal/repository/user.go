@@ -105,7 +105,3 @@ func (p *Postgres) GetCartsByUserID(userID uint) ([]*models.IndividualItemInCart
 
 	return cartItems, nil
 }
-
-
-
-

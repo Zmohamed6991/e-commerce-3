@@ -20,5 +20,6 @@ type Repository interface {
 	GetCartItemByProductID(productID uint) (*models.IndividualItemInCart, error)
 	DeleteProductFromCart(cart *models.IndividualItemInCart) error
 	GetCartsByUserID(userID uint) ([]*models.IndividualItemInCart, error)
-
+	GetOrderByOrderID(orderID uint) (*models.Order, error)
+	UpdateOrder(order *models.Order) error
 }

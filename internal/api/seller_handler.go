@@ -119,3 +119,86 @@ func (u *HTTPHandler) CreateProduct(c *gin.Context) {
 	util.Response(c, "product created successfully", 201, nil, nil)
 
 }
+
+// Order status
+func (u *HTTPHandler) AcceptOrder(c *gin.Context) {
+
+	// make sure the seller is logged in
+	_, err := u.GetSellerFromContext(c)
+	if err != nil {
+		util.Response(c, "invalid token", 401, err.Error(), nil)
+		return
+	}
+
+	orderID := c.Param("id")
+	if orderID == "" {
+		util.Response(c, "invalid order ID", 400, err.Error(), nil)
+		return
+	}
+
+	// get the order via orderID
+	orderIdUint, err := util.ConvertStringToUint(orderID)
+	if err != nil {
+		util.Response(c, "invalid order ID", 400, err.Error(), nil)
+		return
+	}
+
+	order, err := u.Repository.GetOrderByOrderID(orderIdUint)
+	if err != nil {
+		util.Response(c, "order not found", 500, err.Error(), nil)
+		return
+	}
+
+	// check if order is already accepted
+	if order.Status == "ACCEPTED" {
+		util.Response(c, "order already accepted", 400, err.Error(), nil)
+		return
+	}
+
+	// update the order status to accepted
+	order.Status = "ACCEPTED"
+	if err := u.Repository.UpdateOrder(order); err != nil {
+		util.Response(c, "Error Updating Order", 500, err.Error(), nil)
+		return
+	}
+	util.Response(c, "OrderSuccessfully Updated", 200, nil, nil)
+}
+
+func (u *HTTPHandler) DeclineOrder(c *gin.Context) {
+	// make sure the seller is logged in
+	_, err := u.GetSellerFromContext(c)
+	if err != nil {
+		util.Response(c, "invalid token", 401, err.Error(), nil)
+		return
+	}
+
+	orderID := c.Param("id")
+	if orderID == "" {
+		util.Response(c, "invalid order ID", 400, err.Error(), nil)
+		return
+	}
+	//get order via orderID
+	orderIdUint, err := util.ConvertStringToUint(orderID)
+	if err != nil {
+		util.Response(c, "Invalid OrderID", 400, err.Error(), nil)
+		return
+	}
+	order, err := u.Repository.GetOrderByOrderID(orderIdUint)
+	if err != nil {
+		util.Response(c, "order not found", 500, err.Error(), nil)
+		return
+	}
+
+	//check if order has already been declined
+	if order.Status == "DECLINED" {
+		util.Response(c, "order has already been declined", 400, err.Error(), nil)
+		return
+	}
+	//update the order status to declined
+	order.Status = "DECLINED"
+	if err := u.Repository.UpdateOrder(order); err != nil {
+		util.Response(c, "Error Updating Order", 500, err.Error(), nil)
+		return
+	}
+	util.Response(c, "Order Has Been Declined", 200, nil, nil)
+}
