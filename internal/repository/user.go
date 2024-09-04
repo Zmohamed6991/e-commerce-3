@@ -124,7 +124,3 @@ func (p *Postgres) GetOrderItemsByOrderID(orderID uint) ([]*models.OrderItem, er
 	}
 	return orderDetails, nil
 }
-
-
-
-
