@@ -90,6 +90,7 @@ func (p *Postgres) DeleteProductFromCart(cart *models.IndividualItemInCart) erro
 	}
 	return nil
 }
+
 func (p *Postgres) GetCartsByUserID(userID uint) ([]*models.IndividualItemInCart, error) {
 	var cartItems []*models.IndividualItemInCart
 
@@ -104,4 +105,22 @@ func (p *Postgres) GetCartsByUserID(userID uint) ([]*models.IndividualItemInCart
 	}
 
 	return cartItems, nil
+}
+
+func (p *Postgres) OrderHistorybyUserID(userID uint) ([]*models.Order, error) {
+	var orders []*models.Order
+
+	if err := p.DB.Where("user_id = ?", userID).Find(&orders).Error; err != nil {
+		return nil, err
+	}
+	return orders, nil
+}
+
+func (p *Postgres) GetOrderItemsByOrderID(orderID uint) ([]*models.OrderItem, error) {
+	var orderDetails []*models.OrderItem
+
+	if err := p.DB.Preload("Product").Where("order_id = ?", orderID).Find(&orderDetails).Error; err != nil {
+		return nil, err
+	}
+	return orderDetails, nil
 }

@@ -269,6 +269,7 @@ func (u *HTTPHandler) DeleteProductFromCart(c *gin.Context) {
 
 	// Get product by id
 	productID := c.Param("id")
+
 	productIDInt, err := strconv.Atoi(productID)
 	if err != nil {
 		util.Response(c, "Invalid product ID", 400, err.Error(), nil)
@@ -288,4 +289,37 @@ func (u *HTTPHandler) DeleteProductFromCart(c *gin.Context) {
 		return
 	}
 	util.Response(c, "Product deleted from cart", 200, nil, nil)
+}
+
+func (u *HTTPHandler) OrderHistory(c *gin.Context) {
+	// check user is logged in
+	user, err := u.GetUserFromContext(c)
+	if err != nil {
+		util.Response(c, "Error finding user in context", 500, err.Error(), nil)
+		return
+
+	}
+
+	// go into order table to check user id to find order
+	orders, err := u.Repository.OrderHistorybyUserID(user.ID)
+	if err != nil {
+		util.Response(c, "Order not found", 404, err.Error(), nil)
+		return
+	}
+	
+	var orderDetails []models.Order
+	for _, order := range orders {
+		orderItems, err := u.Repository.GetOrderItemsByOrderID(order.ID)
+		if err != nil {
+			util.Response(c, "Internal server error", 500, err.Error(), nil)
+			return
+		}
+		order.Items = orderItems
+		orderDetails = append(orderDetails, *order)
+	}
+
+	util.Response(c, "Orders fetched", 200, gin.H{
+		"orders": orderDetails,
+	}, nil)
+
 }
