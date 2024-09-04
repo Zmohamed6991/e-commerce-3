@@ -39,7 +39,6 @@ func (u *HTTPHandler) CreateSeller(c *gin.Context) {
 		return
 	}
 	util.Response(c, "Seller created", 200, nil, nil)
-
 }
 
 // Login Seller
@@ -117,7 +116,6 @@ func (u *HTTPHandler) CreateProduct(c *gin.Context) {
 	}
 
 	util.Response(c, "product created successfully", 201, nil, nil)
-
 }
 
 // Order status
@@ -132,7 +130,7 @@ func (u *HTTPHandler) AcceptOrder(c *gin.Context) {
 
 	orderID := c.Param("id")
 	if orderID == "" {
-		util.Response(c, "invalid order ID", 400, err.Error(), nil)
+		util.Response(c, "invalid order ID", 400, nil, nil)
 		return
 	}
 
@@ -151,7 +149,7 @@ func (u *HTTPHandler) AcceptOrder(c *gin.Context) {
 
 	// check if order is already accepted
 	if order.Status == "ACCEPTED" {
-		util.Response(c, "order already accepted", 400, err.Error(), nil)
+		util.Response(c, "order already accepted", 400, nil, nil)
 		return
 	}
 
@@ -174,7 +172,7 @@ func (u *HTTPHandler) DeclineOrder(c *gin.Context) {
 
 	orderID := c.Param("id")
 	if orderID == "" {
-		util.Response(c, "invalid order ID", 400, err.Error(), nil)
+		util.Response(c, "invalid order ID", 400, nil, nil)
 		return
 	}
 	//get order via orderID
@@ -191,7 +189,7 @@ func (u *HTTPHandler) DeclineOrder(c *gin.Context) {
 
 	//check if order has already been declined
 	if order.Status == "DECLINED" {
-		util.Response(c, "order has already been declined", 400, err.Error(), nil)
+		util.Response(c, "order has already been declined", 400, nil, nil)
 		return
 	}
 	//update the order status to declined
