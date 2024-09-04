@@ -57,8 +57,8 @@ func SetupRouter(handler *api.HTTPHandler, repository ports.Repository) *gin.Eng
 	{
 		seller.POST("/logout", handler.Logout)
 		seller.POST("/product/create", handler.CreateProduct)
-		seller.PUT("/order/edit", handler.AcceptOrder)
-		seller.PUT("/order/edit", handler.DeclineOrder)
+		seller.PUT("/order/accept/:id", handler.AcceptOrder)
+		seller.PUT("/order/decline/:id", handler.DeclineOrder)
 	}
 
 	return router
