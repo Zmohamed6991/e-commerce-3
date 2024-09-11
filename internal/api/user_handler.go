@@ -323,3 +323,67 @@ func (u *HTTPHandler) OrderHistory(c *gin.Context) {
 	}, nil)
 
 }
+
+func (u *HTTPHandler) PlaceOrder(c *gin.Context) {
+	// Get user ID from context
+	user, err := u.GetUserFromContext(c)
+	if err != nil {
+		util.Response(c, "Error getting user from context", 500, err.Error(), nil)
+		return
+	}
+
+	// Get products in cart
+	cartItems, err := u.Repository.GetCartsByUserID(user.ID)
+	if err != nil {
+		util.Response(c, "Error fetching cart items", 500, err.Error(), nil)
+		return
+	}
+
+	if len(cartItems) == 0 {
+		util.Response(c, "Cart is empty", 400, "No items in the cart", nil)
+		return
+	}
+
+	// Calculate total and prepare order items
+	var total float64
+	var orderItems []*models.OrderItem
+	for _, cartItem := range cartItems {
+		product, err := u.Repository.GetProductByID(cartItem.ProductID)
+		if err != nil {
+			util.Response(c, "Error fetching product details", 500, err.Error(), nil)
+			return
+		}
+
+		// Check if the product is out of stock
+		if cartItem.Quantity > product.Quantity {
+			util.Response(c, "Product out of stock", 400, "Product is out of stock", nil)
+			return
+		}
+
+		// Calculate total price
+		total += float64(cartItem.Quantity) * product.Price
+
+		// Prepare order item
+		orderItems = append(orderItems, &models.OrderItem{
+			ProductID: cartItem.ProductID,
+			Quantity:  cartItem.Quantity,
+		})
+	}
+
+	// Prepare the order
+	order := &models.Order{
+		UserID: user.ID,
+		Total:  total,
+		Status: "PLACED",
+		Items:  orderItems,
+	}
+
+	// Save the order and clear the cart within a transaction
+	err = u.Repository.CreateOrder(order)
+	if err != nil {
+		util.Response(c, "Error creating order", 500, err.Error(), nil)
+		return
+	}
+
+	util.Response(c, "Order placed successfully", 200, nil, nil)
+}

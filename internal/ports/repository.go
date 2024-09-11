@@ -24,4 +24,6 @@ type Repository interface {
 	UpdateOrder(order *models.Order) error
 	OrderHistorybyUserID(userID uint) ([]*models.Order, error)
 	GetOrderItemsByOrderID(orderID uint) ([]*models.OrderItem, error)
+	CreateOrder(order *models.Order) error
+
 }

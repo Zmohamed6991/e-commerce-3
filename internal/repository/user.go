@@ -3,6 +3,7 @@ package repository
 import (
 	"e-commerce/internal/models"
 	"errors"
+	"log"
 )
 
 func (p *Postgres) FindUserByEmail(email string) (*models.User, error) {
@@ -77,7 +78,7 @@ func (p *Postgres) AddToCart(cart *models.IndividualItemInCart) error {
 func (p *Postgres) GetCartItemByProductID(productID uint) (*models.IndividualItemInCart, error) {
 	cart := &models.IndividualItemInCart{}
 
-	if err := p.DB.Where("ID = ?", productID).First(&cart).Error; err != nil {
+	if err := p.DB.Where("product_id = ?", productID).First(&cart).Error; err != nil {
 		return nil, err
 	}
 	return cart, nil
@@ -123,4 +124,35 @@ func (p *Postgres) GetOrderItemsByOrderID(orderID uint) ([]*models.OrderItem, er
 		return nil, err
 	}
 	return orderDetails, nil
+}
+
+
+// create an order
+func (p *Postgres) CreateOrder(order *models.Order) error {
+	tx := p.DB.Begin()
+	if err := tx.Error; err != nil {
+		return err
+	}
+
+	// Attempt to create the order
+	if err := tx.Create(order).Error; err != nil {
+		tx.Rollback()
+		log.Printf("Error creating order: %v", err) // Add this log
+		return err
+	}
+
+	// Clear the cart
+	if err := tx.Where("user_id = ?", order.UserID).Delete(&models.IndividualItemInCart{}).Error; err != nil {
+		tx.Rollback()
+		log.Printf("Error clearing cart: %v", err) // Add this log
+		return err
+	}
+
+	// Commit the transaction
+	if err := tx.Commit().Error; err != nil {
+		log.Printf("Error committing transaction: %v", err) // Add this log
+		return err
+	}
+
+	return nil
 }
