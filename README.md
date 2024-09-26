@@ -2,32 +2,23 @@
 
 **Description**: Contributed and collaborated with project managers and developers on an e-commerce project called Sole Select - a sneaker trading website.
 
-Backend: Go, Gin
-Database: PostgreSQL, GORM
-Deployment:
+**Backend**: Go, Gin
+**Database**: PostgreSQL, GORM
+**Backend Deployed on**: Render
 
-Backend Deployed on: Render
-Tools & Project Management
-Version Control: GitHub
+#Tools & Project Management
+**Version Control**: GitHub
 
-Project Management:
-Jira: We used Jira to assign and manage tasks with the product manager and other developers. We used Jira to plan a 4-week sprint to complete the e-commerce project and updated Jira daily after stand-ups.
-Slack: We used Slack as a communication platform, by communicating in huddles and channels to share findings, progress and ideas.
+#Project Management:
+ - Jira: We used Jira to assign and manage tasks with the product manager and other developers. We used Jira to plan a 4-week sprint to complete the e-commerce project and updated Jira daily after stand-ups.
+ - Slack: We used Slack as a communication platform, by communicating in huddles and channels to share findings, progress and ideas.
 
-Features:
+**Key features**:
 
-Set up user authentication using JWT-based authentication.
-Users can place orders, view their order history, and check order statuses.
-CRUD APIs.
-Key Features:
+ -  Set up user authentication using JWT-based authentication.
+ -  Users can place orders, view order history, update their cart and delete a product
+ -  CRUD APIs.
 
-Salary and Expense Management: Users can submit their monthly salary, and expenses are validated in real-time to ensure they don't exceed the remaining salary. The app provides an overview of all expenses, including the total amount spent and the remaining balance.
-CRUD Operations: Full support for creating, reading, updating, and deleting expenses using a RESTful API designed with the Gin framework, integrated with GORM for database interaction.
-Error Handling and Validation: Error handling and data validation to ensure accurate and correct data entry, providing clear feedback for invalid inputs using status codes and responding with a JSON response.
-My role:
-
-Backend Development: Designed and implemented the backend API using the Gin web framework in Go, ensuring efficient routing and integration with the database for salary and expense management features.
-Database Integration: Integrated GORM for handling database operations, including salary and expense CRUD functionality, ensuring smooth and reliable data storage and retrieval.
 Challenges and Solutions:
 
 Challenge 1: Ensuring that expenses do not exceed the remaining salary, and handling cases where users input incorrect data.
