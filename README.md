@@ -1,4 +1,4 @@
-##Project Title: Sole Select
+#Project Title: Sole Select
 
 **Description**: Contributed and collaborated with project managers and developers on an e-commerce project called Sole Select - a sneaker trading website.
 
@@ -10,7 +10,9 @@ Backend Deployed on: Render
 Tools & Project Management
 Version Control: GitHub
 
-Project Management: Jira and Slack
+Project Management:
+Jira: We used Jira to assign and manage tasks with the product manager and other developers. We used Jira to plan a 4-week sprint to complete the e-commerce project and updated Jira daily after stand-ups.
+Slack: We used Slack as a communication platform, by communicating in huddles and channels to share findings, progress and ideas.
 
 Features:
 
