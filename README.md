@@ -13,11 +13,17 @@
  - Jira: We used Jira to assign and manage tasks with the product manager and other developers. We used Jira to plan a 4-week sprint to complete the e-commerce project and updated Jira daily after stand-ups.
  - Slack: We used Slack as a communication platform, by communicating in huddles and channels to share findings, progress and ideas.
 
+My role and contribution:
+![Sprint view order history](https://github.com/user-attachments/assets/d31fea58-8834-40a1-be69-2932ccca27b3)
+
+
 **Key features**:
 
  -  Set up user authentication using JWT-based authentication.
  -  Users can place orders, view order history, update their cart and delete a product
  -  CRUD APIs.
+
+   
 
 Challenges and Solutions:
 
