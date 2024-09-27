@@ -94,18 +94,19 @@ Clone the repository: git clone Mariana-consultancy/e-commerce-3
   - Create a seller to manage the e-commerce
   - Method: POST
   - URL: https://localhost:8080/seller/create
-- Request body example: 
-      {
-            "first_name": "Sam",
-            "last_name": "Sammy",
-            "password": "sammy96",
-            "date_of_birth": "30/12/96",
-            "email": "sam96@gmail.com",
-            "phone": "079234567812",
-            "address": "sam's road",
-            "store_name": "Select Sole",
-            "store_category": "sneaker store"
-        }
+- Request body example:
+  
+		  {
+		  "first_name": "Sam",
+		  "last_name": "Sammy",
+		  "password": "sammy96",
+		  "date_of_birth": "30/12/96",
+		  "email": "sam96@gmail.com",
+		  "phone": "079234567812",
+		  "address": "sam's road",
+		  "store_name": "Select Sole",
+		  "store_category": "sneaker store"
+		}
 
 **Success response with status code 200 OK.**
 
@@ -129,6 +130,7 @@ Clone the repository: git clone Mariana-consultancy/e-commerce-3
 	- Method: POST
 	- URL: https://localhost:8080/seller/login
 - Request Body example:
+  
 		{
 		    "email": "sam96@gmail.com",
 		    "password": "sammy96"
@@ -167,17 +169,20 @@ Clone the repository: git clone Mariana-consultancy/e-commerce-3
 	- If the email does not exist in the database.
 
 **400 Bad Request**: 
+
 	- If there is an invalid request
 	- If the email and password are left empty.
 	- If the email or password is invalid.
 
 **500 Internal Server Error**:
+
 	- If there is an error generating the access token.
 	- If there is an error generating the refresh token.
 
 ---------
 
-**Add a Product (Seller)**
+**Add a Product (Seller)**:
+
 	- The seller can add product
 	- Method: POST
 	- URL: https://localhost:8080/seller/product/create
