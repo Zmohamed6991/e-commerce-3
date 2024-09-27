@@ -67,18 +67,27 @@ As a beginner fresh from a three-month boot camp, the fast-paced environment of 
 # Full Project Documentation
 
 # Setup Steps:
-  - Go installed (version 1.16 or higher): https://golang.org/dl/
+  - Go installed (version 1.16 or higher):
+- 		https://golang.org/dl/
+  
   - Gin framework: Install using the terminal:
 
-  - go get -u github.com/gin-gonic/gin
+  - 	go get -u github.com/gin-gonic/gin
 
   - GORM ORM (for database interaction): Install using the terminal
   - 	go get -u gorm.io/gorm
     
-  - PostgreSQL: Download and install PostgreSQL to manage the database. You can also install pgAdmin 4 to manage the database via GUI - https://www.postgresql.org/download/
+  - PostgreSQL: Download and install PostgreSQL to manage the database.
     
-- Postman: Download Postman to test API endpoints: https://www.postman.com/downloads/
-Clone the repository: git clone Mariana-consultancy/e-commerce-3
+  - 	 https://www.postgresql.org/download/
+    
+- Postman: Download Postman to test API endpoints:
+  
+- 		 https://www.postman.com/downloads/
+  
+Clone the repository:
+
+- 		git clone Mariana-consultancy/e-commerce-3
 
 
 # Running the Application:
