@@ -94,7 +94,8 @@ Clone the repository:
 
 # Running the Application:
   - To start the application use the following:
-    - Go run ./cmd/main.go
+    
+    	 Go run ./cmd/main.go
 
 **The application will start on the web server at https://localhost:8080**
 
