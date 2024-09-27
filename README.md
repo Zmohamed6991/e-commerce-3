@@ -18,7 +18,8 @@
  - GitHub
    
 **Project Management**:
- - Jira: We used Jira to implement an agile methodology to assign and manage tasks with the product manager and other developers. We used Jira to plan a 4-week sprint to complete the e-commerce project and updated Jira daily after stand-ups.
+ - Jira: We utilised Jira to implement an agile methodology for task assignment and management, collaborating closely with the product manager and developers. Jira was useful in planning and tracking a 4-week sprint for the e-commerce project, with daily updates following stand-up meetings to ensure progress.
+   
  - Slack: We used Slack as a communication platform, by communicating in huddles and channels to share findings, progress and ideas.
 
 **Key features**:
