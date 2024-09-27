@@ -376,14 +376,18 @@ Clone the repository:
 
 
 **Error response**:
+
 **401 Unauthorised**:
-	- If the token is invalid.
-	- If the request is invalid.
+
+- If the token is invalid.
+- If the request is invalid.
+  
 **500 Internal Server Error**:
-	- If the product is not found in the database.
-	- If there is an error adding a product to the cart.
+- If the product is not found in the database.
+- If there is an error adding a product to the cart.
+  
 **400 Bad Request**:
-	- If the product is out of stock.
+- If the product is out of stock.
 
 ----------
 
