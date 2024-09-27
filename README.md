@@ -1,4 +1,4 @@
-Project Title: Sole Select
+# Project Title: Sole Select
 
 **Description**: Contributed and collaborated with project managers and developers on an e-commerce project called Sole Select - a sneaker trading website.
 
@@ -9,7 +9,7 @@ Project Title: Sole Select
 #Tools & Project Management
 **Version Control**: GitHub
 
-#Project Management:
+# Project Management:
  - Jira: We used Jira to implement an agile methodology to assign and manage tasks with the product manager and other developers. We used Jira to plan a 4-week sprint to complete the e-commerce project and updated Jira daily after stand-ups.
  - Slack: We used Slack as a communication platform, by communicating in huddles and channels to share findings, progress and ideas.
 
@@ -23,7 +23,7 @@ My role and contribution:
  -  Users can place orders, view order history, update their cart and delete a product
  -  CRUD APIs.
 
-##My role and contribution:
+# My role and contribution:
 **Sprint 1**:
 At the start of the project, my team and I set up our development environments, including connecting to the PostgreSQL database. My main responsibility was to develop the backend functionality for the shopping cart feature using GORM for communication with the PostgreSQL database and Gin to efficiently handle HTTP requests and routes. 
 In the first sprint, we focused on add to cart method, this was done in collaboration with a colleague. We utilised our boot camp training and external documentation to implement this feature.
@@ -42,17 +42,17 @@ The final sprint focused on wrapping up outstanding tasks. I was tasked with dep
 We also conducted API testing using Postman to ensure the proper functionality of our endpoints.
 
  
-##Challenges and solutions:
+# Challenges and solutions:
 **Challenge 1**:
 In the initial stages, the internship's structure was unclear, and this confusion affected our workflow. To resolve this, I worked closely with the product manager, who reassigned tasks and provided clearer directions for the project. Regular communication helped streamline the development process.
 
 **Challenge 2**:
 As a beginner fresh from a three-month boot camp, the fast-paced environment of completing a project in just four weeks felt overwhelming. I had to quickly get up to speed with using PostgreSQL and GORM for database interactions. To overcome this, I sought 1-on-1 guidance from the project manager, who provided mentorship and support in debugging errors and resolving technical challenges.
 
-Links:
+# Links:
  - [Live Demo]()
  - [GitHub Repository]()
 
 
-##Full Project Documentation
+# Full Project Documentation
 
