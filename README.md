@@ -165,15 +165,18 @@ Clone the repository: git clone Mariana-consultancy/e-commerce-3
 		}
 
 **Error responses**:
+
 **404 Not Found**: 
 - If the email does not exist in the database.
 
 **400 Bad Request**: 
+
 - If there is an invalid request
 - If the email and password are left empty.
 - If the email or password is invalid.
 
 **500 Internal Server Error**:
+
 - If there is an error generating the access token.
 - If there is an error generating the refresh token.
 
