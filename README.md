@@ -66,3 +66,308 @@ As a beginner fresh from a three-month boot camp, the fast-paced environment of 
 
 # Full Project Documentation
 
+# Setup Steps:
+  - Go installed (version 1.16 or higher): https://golang.org/dl/
+  - Gin framework: Install using the terminal:
+
+  - go get -u github.com/gin-gonic/gin
+
+  - GORM ORM (for database interaction): Install using the terminal
+  - 	go get -u gorm.io/gorm
+    
+  - PostgreSQL: Download and install PostgreSQL to manage the database. You can also install pgAdmin 4 to manage the database via GUI - https://www.postgresql.org/download/
+    
+- Postman: Download Postman to test API endpoints: https://www.postman.com/downloads/
+Clone the repository: git clone Mariana-consultancy/e-commerce-3
+
+
+# Running the Application:
+  - To start the application use the following:
+    - Go run ./cmd/main.go
+
+**The application will start on the web server at https://localhost:8080**
+
+
+# Testing Endpoints using Postman:
+
+**Create Seller**
+  - Create a seller to manage the e-commerce
+  - Method: POST
+  - URL: https://localhost:8080/seller/create
+- Request body example: 
+      {
+            "first_name": "Sam",
+            "last_name": "Sammy",
+            "password": "sammy96",
+            "date_of_birth": "30/12/96",
+            "email": "sam96@gmail.com",
+            "phone": "079234567812",
+            "address": "sam's road",
+            "store_name": "Select Sole",
+            "store_category": "sneaker store"
+        }
+
+**Success response with status code 200 OK.**
+
+      {
+          "data": null,
+          "errors": null,
+          "message": "Seller created",
+          "status": "OK",
+          "timestamp": "2024-09-26 18:06:23"
+      }
+
+**Error responses**:
+**500 Internal Server Error**:
+  - If the seller is not created in the database.
+  - If the password is not hashed.
+
+---------
+
+Sign In Seller
+Seller logins in and the JWT access token is generated.
+Method: POST
+URL: https://localhost:8080/seller/login
+Request Body example:
+{
+    "email": "sam96@gmail.com",
+    "password": "sammy96"
+}
+
+Success response with status code 200 OK.
+
+{
+    "data": {
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mjc0NTgwNTMsInVzZXJfZW1haWwiOiJzYW05NkBnbWFpbC5jb20ifQ.3BBAwUk2_yHG7r7JTQ9tebvjDDUUQC0xvOoWhzoUR3M",
+        "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mjc0NTgwNTMsInN1YiI6MX0.-gFJrw-gbhb2l4HGcVJKktHTncGvubb91AWXPjb7UIM",
+        "seller": {
+            "ID": 1,
+            "CreatedAt": "2024-09-26T18:06:23.145474+01:00",
+            "UpdatedAt": "2024-09-26T18:06:23.145474+01:00",
+            "DeletedAt": null,
+            "first_name": "Sam",
+            "last_name": "Sammy",
+            "password": "$2a$14$dw1FVk99wRZ2WXlol3FnZOWhwmQR0giObtdSnivZEQNH4Q5YuJ8Yq",
+            "date_of_birth": "30/12/96",
+            "email": "sam96@gmail.com",
+            "phone": "079234567812",
+            "address": "sam's road",
+            "store_name": "Select Sole",
+            "store_category": "sneaker store"
+        }
+    },
+    "errors": null,
+    "message": "Login successful",
+    "status": "OK",
+    "timestamp": "2024-09-26 18:27:33"
+}
+
+Error responses:
+404 Not Found: 
+If the email does not exist in the database.
+
+400 Bad Request: 
+If there is an invalid request
+If the email and password are left empty.
+If the email or password is invalid.
+
+	500 Internal Server Error:
+If there is an error generating the access token.
+If there is an error generating the refresh token.
+
+
+Add a Product (Seller) 
+The seller can add product
+Method: POST
+URL: https://localhost:8080/seller/product/create
+Use Access Token to authorise adding a product.
+Request Body example:
+{
+    "name": "Jordan 1",
+    "price": 159.99,
+    "image_url": "https://unsplash.com/photos/a-box-with-a-pair-of-shoes-inside-of-it-XFV51iCfdrw",
+    "quantity": 5,
+    "description": "Air Jordan 1, Black and Pink"
+}
+
+Success response with status code 200 OK and message product has been created. 
+
+{
+    "data": null,
+    "errors": null,
+    "message": "product created successfully",
+    "status": "Created",
+    "timestamp": "2024-09-26 18:50:37"
+}
+
+Error response:
+401 Unauthorised: 
+If the token is valid or not inputted
+If there is an invalid request
+		500 Internal Server Error:
+If the product is not created in the database.
+
+
+Sign Up User
+Create user account 
+Method: PUT
+URL: https://localhost:8080/user/create
+Request Body example: 
+{
+    "first_name": "Zagel",
+    "last_name": "Mohamed",
+    "password": "zmohamed96",
+    "date_of_birth": "21/11/96",
+    "email": "zmohamed96@gmail.com",
+    "phone": "07912312312",
+    "address": "zee road"
+}
+
+Success response with status code 200 OK
+{
+    "data": null,
+    "errors": null,
+    "message": "User created",
+    "status": "OK",
+    "timestamp": "2024-09-26 19:07:48"
+}
+
+
+
+
+	Error response:
+400 Bad Request: 
+If there is an invalid request in creating the user.
+	500 Internal Server Error:
+ If there is an error in hashing the password in the database.
+If the user is not created in the database.
+
+
+User Login
+The user can log in and a JWT access token is generated.
+Method: POST
+URL: https://localhost:8080/user/login
+		Request Body Example:
+{
+    "email": "zmohamed96@gmail.com",
+    "password": "zmohamed96"
+}
+Success response with status code 200 OK
+{
+    "data": {
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mjc0NjEwMDgsInVzZXJfZW1haWwiOiJ6bW9oYW1lZDk2QGdtYWlsLmNvbSJ9.oSAWCrrTVpNq7sE8w0QZm1YiR5xAo2U5mHD1SRAggeM",
+        "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mjc0NjEwMDgsInN1YiI6MX0.epRC6RTgvVZqaWowmQtXt3Y3yvpsR7evBIHSt1oKAsI",
+        "user": {
+            "ID": 1,
+            "CreatedAt": "2024-09-26T19:07:48.909972+01:00",
+            "UpdatedAt": "2024-09-26T19:07:48.909972+01:00",
+            "DeletedAt": null,
+            "first_name": "Zagel",
+            "last_name": "Mohamed",
+            "password": "$2a$14$G9kDjXAhvr/XP/jFuB5fHeH60oOhe5SQiDKEpTfL.eMRgCpEMgfYS",
+            "date_of_birth": "21/11/96",
+            "email": "zmohamed96@gmail.com",
+            "phone": "07912312312",
+            "address": "zee road"
+        }
+    },
+    "errors": null,
+    "message": "Login successful",
+    "status": "OK",
+    "timestamp": "2024-09-26 19:16:48"
+}
+
+
+Error response:
+400 Bad Request:
+Invalid request when logging in.
+If the email and password are left blank.
+If the email or password is invalid.
+	404 Not Found:
+If the email does not exist in the database.
+500 Internal Server Error:
+If there is an error generating the access token.
+If there is an error generating the refresh token.
+
+Add to cart
+Users can add product(s) to the cart.
+Method: POST
+URL: https://localhost:8080/user/cart/add
+Use the access token to authorise adding to the cart
+Request Body example:
+{
+    "product_id": 1,
+    "quantity": 2
+}
+
+
+Success response with status code 200 OK. {
+{
+    "data": {
+        "ID": 1,
+        "CreatedAt": "2024-09-26T18:50:37.83469+01:00",
+        "UpdatedAt": "2024-09-26T18:50:37.83469+01:00",
+        "DeletedAt": null,
+        "seller_id": 1,
+        "name": "Jordan 1",
+        "price": 159.99,
+        "image_url": "https://unsplash.com/photos/a-box-with-a-pair-of-shoes-inside-of-it-XFV51iCfdrw",
+        "quantity": 5,
+        "description": "Air Jordan 1, Black and Pink",
+        "status": false,
+        "orders": null
+    },
+    "errors": null,
+    "message": "product added to cart",
+    "status": "OK",
+    "timestamp": "2024-09-26 19:31:46"
+}
+
+
+
+Error response:
+401 Unauthorised:
+If the token is invalid.
+If the request is invalid.
+500 Internal Server Error:
+If the product is not found in the database.
+If there is an error adding a product to the cart.
+	400 Bad Request:
+If the product is out of stock.
+
+
+Edit Cart (User)
+The user can edit product quantity
+Method: PUT 
+URL: https://localhost:8080/user/cart/edit
+Use the access token to authorise 
+Request Body Example:
+{
+    "product_id": 1,
+    "quantity": 1
+}
+
+
+
+Success response with status code 200 OK.
+
+{
+    "data": null,
+    "errors": null,
+    "message": "product successfully added",
+    "status": "OK",
+    "timestamp": "2024-09-26 20:12:20"
+}
+Error response:
+401 Unauthorised:
+If the token is invalid, the user is unauthorised. 
+If the request is invalid.
+404 Status Not Found:
+If the cart is not found in the database.
+500 Internal Server Error:
+If the product is not found in the database by ID. 
+If there is an error updating the product quantity in the cart table in the database.
+	400 Bad Request:
+If the requested quantity exceeds the quantity available. 
+
+
