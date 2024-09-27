@@ -1,4 +1,4 @@
-#Project Title: Sole Select
+Project Title: Sole Select
 
 **Description**: Contributed and collaborated with project managers and developers on an e-commerce project called Sole Select - a sneaker trading website.
 
