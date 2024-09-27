@@ -91,9 +91,9 @@ Clone the repository: git clone Mariana-consultancy/e-commerce-3
 # Testing Endpoints using Postman:
 
 **Create Seller**
-  - Create a seller to manage the e-commerce
-  - Method: POST
-  - URL: https://localhost:8080/seller/create
+- Create a seller to manage the e-commerce
+- Method: POST
+- URL: https://localhost:8080/seller/create
 - Request body example:
   
 		  {
@@ -120,15 +120,15 @@ Clone the repository: git clone Mariana-consultancy/e-commerce-3
 
 **Error responses**:
 **500 Internal Server Error**:
-  - If the seller is not created in the database.
-  - If the password is not hashed.
+- If the seller is not created in the database.
+- If the password is not hashed.
 
 ---------
 
 **Sign In Seller**
-	- Seller logins in and the JWT access token is generated.
-	- Method: POST
-	- URL: https://localhost:8080/seller/login
+- Seller logins in and the JWT access token is generated.
+- Method: POST
+- URL: https://localhost:8080/seller/login
 - Request Body example:
   
 		{
@@ -166,18 +166,16 @@ Clone the repository: git clone Mariana-consultancy/e-commerce-3
 
 **Error responses**:
 **404 Not Found**: 
-	- If the email does not exist in the database.
+- If the email does not exist in the database.
 
 **400 Bad Request**: 
-
-	- If there is an invalid request
-	- If the email and password are left empty.
-	- If the email or password is invalid.
+- If there is an invalid request
+- If the email and password are left empty.
+- If the email or password is invalid.
 
 **500 Internal Server Error**:
-
-	- If there is an error generating the access token.
-	- If there is an error generating the refresh token.
+- If there is an error generating the access token.
+- If there is an error generating the refresh token.
 
 ---------
 
@@ -211,19 +209,22 @@ Clone the repository: git clone Mariana-consultancy/e-commerce-3
 **Error response**:
 **401 Unauthorised**: 
 
-	- If the token is valid or not inputted
-	- If there is an invalid request
+- If the token is valid or not inputted
+- If there is an invalid request
+  
 **500 Internal Server Error**:
-
-	- If the product is not created in the database.
+  
+- If the product is not created in the database.
  
 --------
 
 **Sign Up User**
-	- Create a user account 
-	- Method: PUT
-	- URL: https://localhost:8080/user/create
-	- Request Body example: 
+
+- Create a user account 
+- Method: PUT
+- URL: https://localhost:8080/user/create
+- Request Body example:
+  
 		{
 		    "first_name": "Zagel",
 		    "last_name": "Mohamed",
@@ -249,18 +250,24 @@ Clone the repository: git clone Mariana-consultancy/e-commerce-3
 
 **Error response*:
 **400 Bad Request**: 
-	- If there is an invalid request in creating the user.
+
+- If there is an invalid request in creating the user.
+  
 **500 Internal Server Error**:
-	-  If there is an error in hashing the password in the database.
-	- If the user is not created in the database.
+
+-  If there is an error in hashing the password in the database.
+  
+- If the user is not created in the database.
 
 ------------
 
 **User Login**
-	- The user can log in and a JWT access token is generated.
-	- Method: POST
-	- URL: https://localhost:8080/user/login
-	- Request Body Example:
+
+- The user can log in and a JWT access token is generated.
+- Method: POST
+- URL: https://localhost:8080/user/login
+- Request Body Example:
+  
 		{
 		    "email": "zmohamed96@gmail.com",
 		    "password": "zmohamed96"
@@ -296,23 +303,29 @@ Clone the repository: git clone Mariana-consultancy/e-commerce-3
 
 **Error response**:
 **400 Bad Request**:
-	- Invalid request when logging in.
-	- If the email and password are left blank.
-	- If the email or password is invalid.
+
+- Invalid request when logging in.
+- If the email and password are left blank.
+- If the email or password is invalid.
+  
 **404 Not Found**:
-	- If the email does not exist in the database.
+
+- If the email does not exist in the database.
+  
 **500 Internal Server Error**:
-	- If there is an error generating the access token.
-	- If there is an error generating the refresh token.
+
+- If there is an error generating the access token.
+- If there is an error generating the refresh token.
 
 --------------
 
 **Add to cart**
-	- Users can add product(s) to the cart.
-	- Method: POST
-	- URL: https://localhost:8080/user/cart/add
-	- Use the access token to authorise adding to the cart
- 	- Request Body example:
+
+- Users can add product(s) to the cart.
+- Method: POST
+- URL: https://localhost:8080/user/cart/add
+- Use the access token to authorise adding to the cart
+- Request Body example:
   
 		{
 		    "product_id": 1,
@@ -358,16 +371,18 @@ Clone the repository: git clone Mariana-consultancy/e-commerce-3
 ----------
 
 **Edit Cart (User)**
-	- The user can edit product quantity
-	- Method: PUT 
-	- URL: https://localhost:8080/user/cart/edit
-	- Use the access token to authorise 
-	- Request Body Example:
+
+- The user can edit product quantity
+- Method: PUT 
+- URL: https://localhost:8080/user/cart/edit
+- Use the access token to authorise 
+- Request Body Example:
+  
  
-	{
-	    "product_id": 1,
-	    "quantity": 1
-	}
+		{
+		    "product_id": 1,
+		    "quantity": 1
+		}
 
 
 **Success response with status code 200 OK.**
@@ -383,14 +398,21 @@ Clone the repository: git clone Mariana-consultancy/e-commerce-3
  
 **Error response**:
 **401 Unauthorised**:
-	- If the token is invalid, the user is unauthorised. 
-	- If the request is invalid.
+
+- If the token is invalid, the user is unauthorised. 
+- If the request is invalid.
+  
 **404 Status Not Found**:
-	- If the cart is not found in the database.
+  
+- If the cart is not found in the database.
+  
 **500 Internal Server Error**:
-	- If the product is not found in the database by ID. 
-	- If there is an error updating the product quantity in the cart table in the database.
+  
+- If the product is not found in the database by ID. 
+- If there is an error updating the product quantity in the cart table in the database.
+  
 **400 Bad Request**:
-	- If the requested quantity exceeds the quantity available. 
+
+- If the requested quantity exceeds the quantity available. 
 
 
