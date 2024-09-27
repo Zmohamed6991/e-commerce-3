@@ -2,12 +2,21 @@
 
 **Description**: Contributed and collaborated with project managers and developers on an e-commerce project called Sole Select - a sneaker trading website.
 
-**Backend**: Go, Gin
-**Database**: PostgreSQL, GORM
-**Backend Deployed on**: Render
+**Backend**:
+  - Go 
+  - Gin (framework)
+    
+**Database**: 
+ - PostgreSQL (GORM for interaction)
+   
+**Backend Deployed on**:
+ - Render
 
 # Tools & Project Management:
-**Version Control**: GitHub
+
+**Version Control**: 
+ - GitHub
+ - 
 **Project Management**:
  - Jira: We used Jira to implement an agile methodology to assign and manage tasks with the product manager and other developers. We used Jira to plan a 4-week sprint to complete the e-commerce project and updated Jira daily after stand-ups.
  - Slack: We used Slack as a communication platform, by communicating in huddles and channels to share findings, progress and ideas.
