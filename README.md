@@ -183,11 +183,13 @@ Clone the repository: git clone Mariana-consultancy/e-commerce-3
 
 **Add a Product (Seller)**:
 
-	- The seller can add product
-	- Method: POST
-	- URL: https://localhost:8080/seller/product/create
-	- Use Access Token to authorise adding a product.
-	- Request Body example:
+- The seller can add product
+- Method: POST
+- URL: https://localhost:8080/seller/product/create
+- Use Access Token to authorise adding a product.
+ 
+- Request Body example: 
+
 		{
 		    "name": "Jordan 1",
 		    "price": 159.99,
@@ -208,9 +210,11 @@ Clone the repository: git clone Mariana-consultancy/e-commerce-3
 
 **Error response**:
 **401 Unauthorised**: 
+
 	- If the token is valid or not inputted
 	- If there is an invalid request
 **500 Internal Server Error**:
+
 	- If the product is not created in the database.
  
 --------
