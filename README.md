@@ -61,9 +61,7 @@ In the initial stages, the internship's structure was unclear, and this confusio
 As a beginner fresh from a three-month boot camp, the fast-paced environment of completing a project in just four weeks felt overwhelming. I had to quickly get up to speed with using PostgreSQL and GORM for database interactions. To overcome this, I sought 1-on-1 guidance from the project manager, who provided mentorship and support in debugging errors and resolving technical challenges.
 
 # Links:
- - [Live Demo](https://drive.google.com/file/d/1glPezV347OwBZpPMLP0LneaZBgpKRN6c/view?usp=drive_link)
- - [GitHub Repository](https://github.com/Zmohamed6991/e-commerce-3)
-
+ - [Live Demo](https://drive.google.com/file/d/1M7r4jnwu7ECWie0UOMW3EQeeblQbXheF/view?usp=drive_link)
 
 # Full Project Documentation
 
