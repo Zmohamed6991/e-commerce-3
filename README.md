@@ -432,6 +432,74 @@ Clone the repository:
   
 **400 Bad Request**:
 
-- If the requested quantity exceeds the quantity available. 
+- If the requested quantity exceeds the quantity available.
+
+---------
+
+**View Order History**:
+
+- The User can view their order history
+- Method: GET
+- URL: https://localhost:8080/user/allorders
+- Use the access token to authorise 
 
 
+**Success response with status code 200 OK.**
+
+
+	{
+	    "data": {
+	        "orders": [
+	            {
+	                "ID": 1,
+	                "CreatedAt": "2024-09-30T00:52:01.396812+01:00",
+	                "UpdatedAt": "2024-09-30T00:52:01.396812+01:00",
+	                "DeletedAt": null,
+	                "user_id": 1,
+	                "items": [
+	                    {
+	                        "ID": 1,
+	                        "CreatedAt": "2024-09-30T00:52:01.450812+01:00",
+	                        "UpdatedAt": "2024-09-30T00:52:01.450812+01:00",
+	                        "DeletedAt": null,
+	                        "order_id": 1,
+	                        "product_id": 1,
+	                        "quantity": 1,
+	                        "product": {
+	                            "ID": 1,
+	                            "CreatedAt": "2024-09-30T00:47:52.323268+01:00",
+	                            "UpdatedAt": "2024-09-30T00:47:52.323268+01:00",
+	                            "DeletedAt": null,
+	                            "seller_id": 1,
+	                            "name": "Jordan 1",
+	                            "price": 159.99,
+	                            "image_url": "https://unsplash.com/photos/a-box-with-a-pair-of-shoes-inside-of-it-XFV51iCfdrw",
+	                            "quantity": 5,
+	                            "description": "Air Jordan 1, Black and Pink",
+	                            "status": false,
+	                            "orders": null
+	                        }
+	                    }
+	                ],
+	                "total": 159.99,
+	                "status": "PLACED"
+	            }
+	        ]
+	    },
+	    "errors": null,
+	    "message": "Orders fetched",
+	    "status": "OK",
+	    "timestamp": "2024-09-30 01:24:46"
+	}
+
+
+
+**Error response**:
+
+**404 Status Not Found**:
+- If the order is not found in the database.
+
+
+**500 Internal Server Error**:
+- If there is an error finding the user in context.
+- If there is an internal server while getting the order ID.
